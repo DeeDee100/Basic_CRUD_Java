@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tutorial.crud.model.User;
 import com.tutorial.crud.services.UserService;
+
 
 @RestController
 @RequestMapping(value = "/")
@@ -27,6 +29,11 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping(value = "/user/{email}")
+    public User getById(@PathVariable String email) {
+        return userService.findByEmail(email);
+    }
+
     @PostMapping(value = "/createUser")
     public ResponseEntity<User> create(@RequestBody User userToCreate){
         var userCreated = userService.create(userToCreate);
@@ -36,4 +43,5 @@ public class UserController {
                 .toUri();
         return ResponseEntity.created(location).body(userCreated);
     }
+
 }

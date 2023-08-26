@@ -22,6 +22,12 @@ public class UserService {
         return userList;
     }
 
+    @Transactional(readOnly = true)
+    public User findByEmail(String email) {
+        User result = userRepository.findByEmail(email).get(0);
+        return result;
+    }
+
     public User create(User userToCreate) {
         String userEmail = userToCreate.getEmail();
 

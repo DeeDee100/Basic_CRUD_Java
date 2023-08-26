@@ -12,28 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.tutorial.crud.model.Movie;
-import com.tutorial.crud.services.MovieService;
+import com.tutorial.crud.model.User;
+import com.tutorial.crud.services.UserService;
 
 @RestController
 @RequestMapping(value = "/")
-public class MovieController {
+public class UserController {
     
     @Autowired
-    private MovieService movieService;
+    private UserService userService;
 
     @GetMapping
-    public List<Movie> getAll(){
-        return movieService.findAll();
+    public List<User> getAll(){
+        return userService.findAll();
     }
 
-    @PostMapping(value = "/createMovie")
-    public ResponseEntity<Movie> create(@RequestBody Movie movieToCreate){
-        var movieCreated = movieService.create(movieToCreate);
+    @PostMapping(value = "/createUser")
+    public ResponseEntity<User> create(@RequestBody User userToCreate){
+        var userCreated = userService.create(userToCreate);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(movieCreated.getId())
+                .buildAndExpand(userCreated.getId())
                 .toUri();
-        return ResponseEntity.created(location).body(movieCreated);
+        return ResponseEntity.created(location).body(userCreated);
     }
 }

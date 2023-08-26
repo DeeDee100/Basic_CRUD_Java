@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_user")
-public class Movie {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +18,13 @@ public class Movie {
 
     @Column(unique = true)
     private String email;
+    
 
-    public Movie(){
+
+    public User(){
     }
 
-    public Movie(String name, String email) {
+    public User(String name, String email) {
         this.name = name;
         this.email = email;
     }

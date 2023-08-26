@@ -23,8 +23,12 @@ public class MovieService {
     }
 
     public Movie create(Movie movieToCreate) {
-        Long userId = movieToCreate.getId();
-        // TODO: Verificar se user existe
+        String userEmail = movieToCreate.getEmail();
+
+        if (movieRepository.existsByEmail(userEmail)) {
+            throw new IllegalArgumentException("This user already exists");
+        }
+        
         movieRepository.save(movieToCreate);
         return movieToCreate;
     }

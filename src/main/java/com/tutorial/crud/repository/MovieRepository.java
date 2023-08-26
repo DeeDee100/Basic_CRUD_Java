@@ -6,4 +6,5 @@ import com.tutorial.crud.model.Movie;
 
 public interface MovieRepository  extends JpaRepository<Movie, Long>{
 
+    boolean existsByEmail(String email);
 }

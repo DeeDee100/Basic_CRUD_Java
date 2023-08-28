@@ -1,6 +1,7 @@
 package com.tutorial.crud.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,18 @@ public class UserService {
         
         userRepository.save(userToCreate);
         return userToCreate;
+    }
+
+    public void updateUser(User userToUpdate) {
+        
+        List<User> userData = userRepository.findByEmail(userToUpdate.getEmail());
+        if (userData.isEmpty()) {
+            throw new NoSuchElementException("User " + userToUpdate.getName() + " does not exists");
+        }
+            User newUser = userData.get(0);
+            newUser.setEmail(userToUpdate.getEmail());
+            newUser.setName(userToUpdate.getName());
+            newUser.setPhone(userToUpdate.getPhone());
+            userRepository.save(newUser);
     }
 }

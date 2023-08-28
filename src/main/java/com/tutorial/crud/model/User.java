@@ -18,15 +18,16 @@ public class User {
 
     @Column(unique = true)
     private String email;
-    
-
+    private String phone;
 
     public User(){
     }
 
-    public User(String name, String email) {
+    public User(Long id,String name, String email, String phone) {
+        this.id = id;
         this.name = name;
         this.email = email;
+        this.phone = phone;
     }
 
     public Long getId() {
@@ -49,5 +50,16 @@ public class User {
         this.email = email;
     }
 
-    
+        public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public User map(Object object) {
+        return null;
+    }
+
 }

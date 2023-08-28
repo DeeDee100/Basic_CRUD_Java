@@ -52,4 +52,13 @@ public class UserService {
             newUser.setPhone(userToUpdate.getPhone());
             userRepository.save(newUser);
     }
+
+    public void delete(String email) {
+        List<User> userList = userRepository.findByEmail(email);
+        if (userList.isEmpty()) {
+            throw new NoSuchElementException("User not found");
+        }
+        User user = userList.get(0);
+        userRepository.deleteById(user.getId());
+    }
 }

@@ -27,7 +27,7 @@ public class User {
     private String email;
     private String phone;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Movie> movieList;
 
     public User(){

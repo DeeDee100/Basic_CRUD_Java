@@ -2,6 +2,7 @@ package com.tutorial.crud.services;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class UserService {
     public List<User> findAll(){
         List<User> userList = userRepository.findAll();
         return userList;
+    }
+
+    public Optional<User>findById(Long id){
+        return userRepository.findById(id);
     }
 
     @Transactional(readOnly = true)

@@ -1,11 +1,12 @@
 package com.tutorial.crud.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -28,10 +29,11 @@ public class Movie {
     private String genre;
     private Double rating;
     
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-        public Movie() {
+    public Movie() {
     }
 
     public Movie(Long id, String title, String description, Integer year, String genre, Double rating) {
@@ -89,6 +91,14 @@ public class Movie {
 
     public void setRating(Double rating) {
         this.rating = rating;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     

@@ -1,6 +1,7 @@
+FROM maven:3.8.2-openjdk-17
 
-FROM openjdk:17-jdk-alpine
+COPY . .
 
-COPY target/demo-0.0.1-SNAPSHOT.jar app-1.0.0.jar
+RUN mvn clean install -DskipTests
 
-ENTRYPOINT [ "java", "-jar", "app-1.0.0.jar" ]
+CMD mvn spring-boot:run
